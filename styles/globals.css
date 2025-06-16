@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+
+body {
+  user-select: none;
+}
+
+/* Tailwind */
+@theme {
+  --color-primary: #D87D4A;
+  --color-secondary: #fbaf85;
+  --color-dark-1: #101010;
+  --color-dark-2: #000000;
+  --color-light-1: #F1F1F1;
+  --color-light-2: #FAFAFA;
+  --color-light-3: #FFFFFF;
+
+}
+
+
+/* Custom styles for headers */
+.h1 {
+  @apply font-bold uppercase text-[56px] leading-[58px] tracking-[2px];
+}
+
+.h2 {
+  @apply font-bold uppercase text-[40px] leading-[44px] tracking-[1.5px];
+}
+
+.h3 {
+  @apply font-bold uppercase text-[32px] leading-[36px] tracking-[1.15px];
+}
+
+.h4 {
+  @apply font-bold uppercase text-[28px] leading-[38px] tracking-[2px];
+}
+
+.h5 {
+  @apply font-bold uppercase text-[24px] leading-[33px] tracking-[1.7px];
+}
+
+.h6 {
+  @apply font-bold uppercase text-[18px] leading-[24px] tracking-[1.3px];
+}
+
+.custom-overline {
+  @apply font-normal uppercase text-[14px] leading-[19px] tracking-[10px]
+}
+
+.subtitle {
+  @apply font-bold uppercase text-[13px] leading-[25px] tracking-[1x]
+}
+
+.body {
+  @apply font-medium text-[15px] leading-[25px];
+}
+
+#home-zx7-speaker {
+  background-image: url('/assets/home/desktop/image-speaker-zx7.jpg');
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+
+#home-intro {
+  background-image: url('/assets/home/desktop/image-hero.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 1024px) {
+  #home-intro {
+    background-size: cover;
+    background-image: url('/assets/home/tablet/image-header.jpg');
+  }
+}
+
+@media (max-width: 768px) {
+  #home-intro {
+    background-size: cover;
+    background-image: url('/assets/home/mobile/image-header.jpg');
+  }
+}
