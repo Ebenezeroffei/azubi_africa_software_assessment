@@ -2,16 +2,18 @@ import { useAppContext } from "@/providers/ContextProvider"
 import CustomButton from "../buttons/CustomButton";
 import { useRouter } from "next/navigation";
 import MiscUtils from "@/utils/misc/misc_utils";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { CartItemModel } from "@/@types/CartModel";
 import Image from "next/image";
 import ProductUtils from "@/utils/products/products_utils";
+import { toast } from "react-toastify";
 
 const ThankYou = () => {
     const { cart, setCart, setShowSmallModal } = useAppContext();
     const router = useRouter();
     const [showMore, setShowMore] = useState(false);
     const cartItems: CartItemModel[] = cart ? Object.values(cart as Object) : [];
+    const [sanitizedCartItems, setSanitizedCartItems] = useState<CartItemModel[]>([]);
     let subTotal = 0
     cartItems.forEach(ele => subTotal += (ele.price * ele.quantity))
     const VAT = subTotal * 0.2;
@@ -19,12 +21,28 @@ const ThankYou = () => {
     const randomId = useId();
 
     const backToHome = () => {
+        toast.success("Order processed.")
         router.replace('/');
         setShowSmallModal(_ => false);
         ProductUtils.clearCart(
             setCart,
         );
+
     }
+
+    useEffect(() => {
+        if (cartItems.length > 0) {
+            setSanitizedCartItems(_ => cartItems.slice(0, 1));
+        }
+    }, [])
+
+    useEffect(() => {
+        if (showMore) {
+            setSanitizedCartItems(_ => cartItems)
+        } else {
+            setSanitizedCartItems(_ => cartItems.slice(0, 1));
+        }
+    }, [showMore])
 
     return (
         <section className="space-y-4">
@@ -45,8 +63,8 @@ const ThankYou = () => {
                 <section className="p-4 bg-light-1 col-span-4">
                     <div>
                         {
-                            cartItems.length > 0 ? (
-                                cartItems.map((item, index) => (
+                            sanitizedCartItems.length > 0 ? (
+                                sanitizedCartItems.map((item, index) => (
                                     <section
                                         className='flex gap-4 justify-between items-start bg-light-1'
                                         key={`${index}_${randomId}_checkout_item`}
@@ -79,17 +97,21 @@ const ThankYou = () => {
                             )
                         }
                     </div>
-                    <div
-                        onClick={() => setShowMore(prevShowMore => !prevShowMore)}
-                        className="border-t cursor-pointer border-gray-300 mt-4 pt-4 text-xs font-semibold text-gray-500 text-center"
-                    >
-                        {
-                            showMore
-                                ? "View less"
-                                : "and two other items"
-                        }
+                    {
+                        cartItems.length > 1 && (
+                            <div
+                                onClick={() => setShowMore(prevShowMore => !prevShowMore)}
+                                className="border-t cursor-pointer border-gray-300 mt-4 pt-4 text-xs font-semibold text-gray-500 text-center"
+                            >
+                                {
+                                    showMore
+                                        ? "View less"
+                                        : `and two other items`
+                                }
 
-                    </div>
+                            </div>
+                        )
+                    }
                 </section>
                 <section className="p-4 bg-dark-1 col-span-3 flex items-end">
                     <div>

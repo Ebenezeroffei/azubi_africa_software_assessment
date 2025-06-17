@@ -6,17 +6,26 @@ import CustomButton from "../buttons/CustomButton";
 import MiscUtils from "@/utils/misc/misc_utils";
 import Image from "next/image";
 import ProductUtils from "@/utils/products/products_utils";
-import { useId } from "react";
+import { useEffect, useId } from "react";
+import { useRouter } from "next/navigation";
 
 const CheckoutSummary = () => {
     const contextValues = useAppContext();
-    const { cart, setCart } = contextValues;
+    const { cart } = contextValues;
     const cartItems: CartItemModel[] = cart ? Object.values(cart as Object) : [];
     let subTotal = 0
     cartItems.forEach(ele => subTotal += (ele.price * ele.quantity))
     const VAT = subTotal * 0.2;
-    const total = subTotal + 50 + VAT;
+    let total = subTotal + VAT;
+    total += cartItems.length > 0 ? 50 : 0;
     const randomId = useId();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!cart || Object.keys(cart as Object).length == 0) {
+            router.replace('/');
+        }
+    }, [cart])
 
     return (
         <section className="bg-white md:max-w-[350px] flex-1 p-6">

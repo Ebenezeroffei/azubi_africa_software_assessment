@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react'
 import { IoCartOutline, IoMenu } from "react-icons/io5";
 import CartModal from './CartModal';
 import { useAppContext } from '@/providers/ContextProvider';
+import SecondaryNavBar from './SecondaryNavbar';
+import { useObserveScreenSize } from '@/hooks/useObserveScreenSize';
 
 
 type NavItemProps = {
@@ -33,14 +35,14 @@ const AppName = () => {
 }
 
 const Header = () => {
-    const { showCart, setShowCart } = useAppContext();
+    const { showCart, setShowCart, showSecondarySidebar, setShowSecondarySidebar } = useAppContext();
 
     useEffect(() => {
-        showCart
+        (showCart || showSecondarySidebar)
             ? document.body.style.overflow = 'hidden'
             : document.body.style.overflow = 'auto';
 
-    }, [showCart])
+    }, [showCart, showSecondarySidebar])
 
     return (
         <>
@@ -50,15 +52,26 @@ const Header = () => {
                         <CartModal />
                     )
                 }
+                {
+                    showSecondarySidebar && (
+                        <SecondaryNavBar />
+                    )
+                }
                 <section className='container py-2 mx-auto flex justify-between items-center'>
-                    <section className='cursor-pointer sm:hidden'>
+                    <section
+                        className='cursor-pointer sm:hidden'
+                        onClick={() => setShowSecondarySidebar(_ => true)}
+                    >
                         <IoMenu
                             className='text-white'
                             size={20}
                         />
                     </section>
                     <div className='flex items-center gap-6'>
-                        <section className='cursor-pointer hidden sm:block md:hidden '>
+                        <section
+                            className='cursor-pointer hidden sm:block md:hidden'
+                            onClick={() => setShowSecondarySidebar(_ => true)}
+                        >
                             <IoMenu
                                 className='text-white'
                                 size={20}

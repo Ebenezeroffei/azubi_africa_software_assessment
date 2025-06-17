@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     template: "Azubi Africa Software Assessment | %s",
     default: "Azubi Africa Software Assessment"
   },
+  icons: {
+    icon: '/assets/favicon.png',
+  },
 };
 
 export default function RootLayout({

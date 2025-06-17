@@ -10,6 +10,7 @@ import BestGear from '../home/BestGear';
 import ProductGallery from './ProductGallery';
 import ProductUtils from '@/utils/products/products_utils';
 import { useAppContext } from '@/providers/ContextProvider';
+import GoBack from '../misc/GoBack';
 
 type ProductDetailPageWrapperProps = {
     productId: string,
@@ -44,8 +45,9 @@ const ProductDetailPageWrapper = ({
 
     if (isPageReady && product) return (
         <section className='container mx-auto px-4'>
+            <GoBack />
             {/* Product Info */}
-            <section className="grid grid-cols-1 md:grid-cols-2 items-center my-8 justify-center gap-8">
+            <section className="grid grid-cols-1 md:grid-cols-2 items-center mb-8 justify-center gap-8">
                 <div className={`bg-light-1 `}>
                     <Image
                         alt="Image"

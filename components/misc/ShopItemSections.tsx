@@ -62,4 +62,5 @@ const ShopItemSections = () => {
     )
 }
 
+export { ShopItemSection };
 export default ShopItemSections

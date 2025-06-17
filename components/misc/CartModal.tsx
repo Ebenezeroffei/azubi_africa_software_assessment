@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import CustomButton from '../buttons/CustomButton'
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAppContext } from '@/providers/ContextProvider';
 import ProductUtils from '@/utils/products/products_utils';
 import { CartItemModel } from '@/@types/CartModel';
