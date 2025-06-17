@@ -20,27 +20,27 @@ body {
 
 /* Custom styles for headers */
 .h1 {
-  @apply font-bold uppercase text-[56px] leading-[58px] tracking-[2px];
+  @apply font-bold uppercase text-[46px] md:text-[56px] leading-[58px] tracking-[2px];
 }
 
 .h2 {
-  @apply font-bold uppercase text-[40px] leading-[44px] tracking-[1.5px];
+  @apply font-bold uppercase text-[33px] md:text-[40px] leading-[44px] tracking-[1.5px];
 }
 
 .h3 {
-  @apply font-bold uppercase text-[32px] leading-[36px] tracking-[1.15px];
+  @apply font-bold uppercase text-[26px] md:text-[32px] leading-[36px] tracking-[1.15px];
 }
 
 .h4 {
-  @apply font-bold uppercase text-[28px] leading-[38px] tracking-[2px];
+  @apply font-bold uppercase text-[23px] md:text-[28px] leading-[38px] tracking-[2px];
 }
 
 .h5 {
-  @apply font-bold uppercase text-[24px] leading-[33px] tracking-[1.7px];
+  @apply font-bold uppercase text-[20px] md:text-[24px] leading-[33px] tracking-[1.7px];
 }
 
 .h6 {
-  @apply font-bold uppercase text-[18px] leading-[24px] tracking-[1.3px];
+  @apply font-bold uppercase text-[15px] md:text-[18px] leading-[24px] tracking-[1.3px];
 }
 
 .custom-overline {
