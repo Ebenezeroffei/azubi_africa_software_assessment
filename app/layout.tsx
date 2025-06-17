@@ -33,7 +33,11 @@ export default function RootLayout({
       <body
         className={`${manrope.className} antialiased`}
       >
-        <ToastContainer />
+        <ToastContainer
+          closeOnClick={true}
+          autoClose={3000}
+          stacked={true}
+        />
         <ContextProvider>
           <ModalProvider />
           <Header />
