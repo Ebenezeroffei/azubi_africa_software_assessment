@@ -38,7 +38,7 @@ const CartItem = ({
                     </p>
                 </section>
             </div>
-            <div className='flex items-center bg-light-1 rounded-xs h-[48px] overflow-hidden'>
+            <div className='flex items-center flex-none bg-light-1 rounded-xs h-[48px] overflow-hidden'>
                 <section
                     onClick={() => ProductUtils.modifyCartItem(
                         item.product.slug,
