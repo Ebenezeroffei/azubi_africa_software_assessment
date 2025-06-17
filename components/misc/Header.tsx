@@ -1,6 +1,10 @@
+'use client';
+
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoCartOutline, IoMenu } from "react-icons/io5";
+import CartModal from './CartModal';
+import { useAppContext } from '@/providers/ContextProvider';
 
 
 type NavItemProps = {
@@ -29,50 +33,69 @@ const AppName = () => {
 }
 
 const Header = () => {
+    const { showCart, setShowCart } = useAppContext();
+
+    useEffect(() => {
+        showCart
+            ? document.body.style.overflow = 'hidden'
+            : document.body.style.overflow = 'auto';
+
+    }, [showCart])
+
     return (
-        <header className='bg-dark-1 p-4'>
-            <section className='container py-2 mx-auto flex justify-between items-center'>
-                <section className='cursor-pointer sm:hidden'>
-                    <IoMenu
-                        className='text-white'
-                        size={20}
-                    />
-                </section>
-                <div className='flex items-center gap-6'>
-                    <section className='cursor-pointer hidden sm:block md:hidden '>
+        <>
+            <header className='bg-dark-1 p-4 relative'>
+                {
+                    showCart && (
+                        <CartModal />
+                    )
+                }
+                <section className='container py-2 mx-auto flex justify-between items-center'>
+                    <section className='cursor-pointer sm:hidden'>
                         <IoMenu
                             className='text-white'
                             size={20}
                         />
                     </section>
-                    <AppName />
-                </div>
-                <nav className='items-center gap-8 hidden md:flex'>
-                    <NavItem
-                        href='/'
-                        name='Home'
-                    />
-                    <NavItem
-                        href='/'
-                        name='Headphones'
-                    />
-                    <NavItem
-                        href='/'
-                        name='Speakers'
-                    />
-                    <NavItem
-                        href='/'
-                        name='Earphones'
-                    />
-                </nav>
-                <Link href={'/cart'}>
-                    <IoCartOutline
-                        className='text-white'
-                        size={20}
-                    />
-                </Link>
-            </section>
-        </header>
+                    <div className='flex items-center gap-6'>
+                        <section className='cursor-pointer hidden sm:block md:hidden '>
+                            <IoMenu
+                                className='text-white'
+                                size={20}
+                            />
+                        </section>
+                        <AppName />
+                    </div>
+                    <nav className='items-center gap-8 hidden md:flex'>
+                        <NavItem
+                            href='/'
+                            name='Home'
+                        />
+                        <NavItem
+                            href='/headphones'
+                            name='Headphones'
+                        />
+                        <NavItem
+                            href='/speakers'
+                            name='Speakers'
+                        />
+                        <NavItem
+                            href='/earphones'
+                            name='Earphones'
+                        />
+                    </nav>
+                    <div
+                        className='cursor-pointer'
+                        onClick={() => setShowCart(_ => true)}
+                    >
+                        <IoCartOutline
+                            className='text-white'
+                            size={20}
+                        />
+                    </div>
+                </section>
+            </header>
+        </>
     )
 }
 

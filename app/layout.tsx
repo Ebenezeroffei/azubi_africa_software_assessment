@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import "@/styles/globals.css";
 import Header from "@/components/misc/Header";
 import Footer from "@/components/misc/Footer";
+import ModalProvider from "@/providers/ModalProvider";
+import ContextProvider from "@/providers/ContextProvider";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/ReactToastify.css';
+import "@/styles/globals.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -26,9 +30,13 @@ export default function RootLayout({
       <body
         className={`${manrope.className} antialiased`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <ToastContainer />
+        <ContextProvider>
+          <ModalProvider />
+          <Header />
+          {children}
+          <Footer />
+        </ContextProvider>
       </body>
     </html>
   );

@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "@node_modules/@types/react"
+import { PropsWithChildren } from "react"
 
 const FormWrapper = ({ children }: PropsWithChildren) => {
     return (
-        <section className="py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <section className="py-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
             {children}
         </section>
     )

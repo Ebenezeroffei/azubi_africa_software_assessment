@@ -39,15 +39,15 @@ const Footer = () => {
                             name='Home'
                         />
                         <NavItem
-                            href='/'
+                            href='/headphones'
                             name='Headphones'
                         />
                         <NavItem
-                            href='/'
+                            href='/speakers'
                             name='Speakers'
                         />
                         <NavItem
-                            href='/'
+                            href='/earphones'
                             name='Earphones'
                         />
                     </nav>

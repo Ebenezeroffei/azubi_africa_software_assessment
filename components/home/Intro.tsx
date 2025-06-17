@@ -1,8 +1,11 @@
 'use client';
 
+import { useRouter } from "next/navigation";
 import CustomButton from "../buttons/CustomButton"
 
 const Intro = () => {
+    const router = useRouter();
+
     return (
         <section className='bg-dark-1 px-4 py-24' id="home-intro">
             <div className='container py-8 mx-auto relative border-t border-gray-800 flex'>
@@ -14,7 +17,10 @@ const Intro = () => {
                     <p className="body text-gray-400 text-center lg:text-left">
                         Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.
                     </p>
-                    <CustomButton text="See Product" />
+                    <CustomButton
+                        text="See Product"
+                        onPressed={() => router.push('/products/xx99-mark-two-headphones')}
+                    />
                 </section>
             </div>
         </section>

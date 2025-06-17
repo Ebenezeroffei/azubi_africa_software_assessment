@@ -2,8 +2,11 @@
 
 import Image from "next/image"
 import CustomOutlineButton from "../buttons/CustomOutlineButton"
+import { useRouter } from "next/navigation"
 
 const YX1Earphones = () => {
+    const router = useRouter();
+
     return (
         <section className="grid grid-cols-1 gap-8 md:grid-cols-2 mb-24">
             <Image
@@ -18,6 +21,7 @@ const YX1Earphones = () => {
                 <p className="h4">YX1 Earphones</p>
                 <CustomOutlineButton
                     text="See Product"
+                    onPressed={() => router.push('/products/yx1-earphones')}
                 />
             </div>
         </section>

@@ -1,44 +1,45 @@
 'use client';
 
-import { useContext, createContext, PropsWithChildren, useState, Dispatch, SetStateAction, ReactNode } from "react"
+import CartModel from "@/@types/CartModel";
+import { useContext, createContext, PropsWithChildren, useState, Dispatch, SetStateAction, ReactNode, useEffect } from "react"
 
 export type ContextValuesType = {
-    isSmallScreen: boolean,
-    setIsSmallScreen: Dispatch<SetStateAction<boolean>>,
+    cart: CartModel | undefined,
+    setCart: Dispatch<SetStateAction<CartModel | undefined>>,
     showSecondarySidebar: boolean,
     setShowSecondarySidebar: Dispatch<SetStateAction<boolean>>,
-    modalTitle: string | undefined,
-    setModalTitle: Dispatch<SetStateAction<string | undefined>>,
+    showCart: boolean,
+    setShowCart: Dispatch<SetStateAction<boolean>>,
     modalContent: ReactNode | undefined,
     setModalContent: Dispatch<SetStateAction<ReactNode | undefined>>,
     showSmallModal: boolean,
     setShowSmallModal: Dispatch<SetStateAction<boolean>>,
-    showBigModal: boolean,
-    setShowBigModal: Dispatch<SetStateAction<boolean>>,
 }
 const AppContext = createContext<ContextValuesType | null>(null);
 
 const ContextProvider = ({ children }: PropsWithChildren) => {
-    const [isSmallScreen, setIsSmallScreen] = useState(true);
     const [showSecondarySidebar, setShowSecondarySidebar] = useState(false);
-    const [modalTitle, setModalTitle] = useState<string>();
-    const [modalContent, setModalContent] = useState<ReactNode>();
+    const [modalContent, setModalContent] = useState<ReactNode>()
     const [showSmallModal, setShowSmallModal] = useState(false);
-    const [showBigModal, setShowBigModal] = useState(false);
+    const [showCart, setShowCart] = useState(false);
+    const [cart, setCart] = useState<CartModel>()
+
+    useEffect(() => {
+        const cart: CartModel = JSON.parse(localStorage.getItem('cart') ?? '{}')
+        setCart(_ => cart);
+    }, [])
 
     const contextValue: ContextValuesType = {
-        isSmallScreen,
-        setIsSmallScreen,
+        cart,
+        setCart,
         showSecondarySidebar,
         setShowSecondarySidebar,
-        modalTitle,
-        setModalTitle,
+        showCart,
+        setShowCart,
         modalContent,
         setModalContent,
         showSmallModal,
         setShowSmallModal,
-        showBigModal,
-        setShowBigModal,
     };
 
     return (

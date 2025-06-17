@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from "@node_modules/@types/react"
-import MiscUtils from "@utils/misc/misc_utils"
+import { Dispatch, SetStateAction } from "@/node_modules/@types/react"
+import MiscUtils from "@/utils/misc/misc_utils"
 
 type CustomRadioButtonProps = {
     label: string,
@@ -17,9 +17,10 @@ const CustomRadioButton = ({
     setValue,
 }: CustomRadioButtonProps) => {
     const inputNameAndId = MiscUtils.generateInputNameAndId(label)
+    const isSelected = selectedValue === value;
 
     return (
-        <section className="px-2 py-1 border flex items-center gap-1 border-gray-300 rounded-xs">
+        <section className={`p-4 border rounded-lg flex items-center gap-3 border-gray-300 hover:border-primary ${isSelected && 'border-primary'}`}>
             <input
                 type="radio"
                 value={value}
@@ -27,10 +28,11 @@ const CustomRadioButton = ({
                 name={group}
                 checked={value === selectedValue}
                 id={inputNameAndId}
+                className="accent-primary"
             />
             <label
                 htmlFor={inputNameAndId}
-                className="text-sm font-semibold text-gray-600"
+                className="text-sm font-semibold flex-1"
             >
                 {label}
             </label>

@@ -5,12 +5,14 @@ import { MdChevronRight } from 'react-icons/md'
 
 type ShopItemSectionProps = {
     src: string,
-    name: string
+    name: string,
+    href: string,
 }
 
 const ShopItemSection = ({
     src,
-    name
+    name,
+    href,
 }: ShopItemSectionProps) => {
     return (
         <section className='relative pt-12'>
@@ -26,7 +28,7 @@ const ShopItemSection = ({
                 <p className='h6 text-center'>
                     {name}
                 </p>
-                <Link href={'/'} className='uppercase font-semibold items-center tracking-widest text-gray-600 text-xs flex justify-center mt-2'>
+                <Link href={href} className='uppercase mt-4 font-semibold items-center tracking-widest text-gray-600 text-xs flex justify-center'>
                     Shop
                     <MdChevronRight
                         size={15}
@@ -44,14 +46,17 @@ const ShopItemSections = () => {
             <ShopItemSection
                 src='/assets/shared/desktop/image-category-thumbnail-headphones.png'
                 name='Headphones'
+                href='/headphones'
             />
             <ShopItemSection
                 src='/assets/shared/desktop/image-category-thumbnail-speakers.png'
                 name='Speakers'
+                href='/speakers'
             />
             <ShopItemSection
                 src='/assets/shared/desktop/image-category-thumbnail-earphones.png'
                 name='Earphones'
+                href='/earphones'
             />
         </section>
     )

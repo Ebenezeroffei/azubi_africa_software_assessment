@@ -1,83 +1,59 @@
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { MdClose } from "@node_modules/react-icons/md"
-import TextFieldUtils from "@utils/components/text_field_utils";
-import MiscUtils from "@utils/misc/misc_utils"
-import Validators from "@constants/misc/validators";
+import { MdClose } from "react-icons/md"
+import TextFieldUtils from "@/utils/components/text_field_utils";
+import MiscUtils from "@/utils/misc/misc_utils"
+import Validators from "@/constants/misc/validators";
 
 export type TextFieldProps = {
     value: string,
     setValue: Dispatch<SetStateAction<string>>,
     label?: string,
-    onSubmitHandler?: () => void,
     pattern?: RegExp,
-    showCloseButton?: boolean,
     isRequired?: boolean,
-    errorText?: string,
-    helpText?: string,
     textType?: string,
-    min?: number,
-    max?: number,
-    step?: number,
-    readOnly?: boolean,
+    placeholder?: string,
 }
 
 const CustomTextField = ({
     value,
     setValue,
     label = '',
-    max,
-    min,
-    step,
     pattern = Validators.General,
-    showCloseButton = true,
+    placeholder,
     isRequired = true,
-    onSubmitHandler = () => { },
     textType = "text",
-    helpText = "",
-    errorText = "Please provide a value for this field.",
-    readOnly = false,
 }: TextFieldProps) => {
     const inputNameAndId = MiscUtils.generateInputNameAndId(label);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isError, setIsError] = useState(false);
-    const [hasValue, setHasValue] = useState(Boolean(value));
 
     return (
         <section className="pb-2">
             {/* Label */}
-            <div>
+            <div className={`flex justify-between ${isError && 'text-red-600'}`}>
                 <label
                     htmlFor={inputNameAndId}
-                    className="text-xs font-semibold capitalize tracking-wide text-gray-600 flex"
+                    className="text-xs font-semibold capitalize tracking-wide flex"
                 >
-                    {label}:
-                    {
-                        isRequired && (
-                            <span
-                                className="text-red-500 ml-0.5"
-                            >
-                                *
-                            </span>
-                        )
-                    }
+                    {label}
                 </label>
+                {
+                    isError && (
+                        <p className="text-xs">
+                            Wrong Format
+                        </p>
+                    )
+                }
             </div>
             {/* Input */}
-            <div className="p-2 my-2 border border-gray-200 flex transition-all duration-100 items-center gap-x-2 rounded focus-within:border-gray-400 focus-within:border-b-2 focus-within:border-b-primary">
+            <div className={`p-3 my-2 flex transition-all duration-100 items-center gap-x-2 rounded-lg ${isError ? 'border-2 border-red-600' : 'border border-gray-200 focus-within:border-primary'} `}>
                 <input
                     type={textType}
                     id={inputNameAndId}
                     name={inputNameAndId}
                     ref={inputRef}
                     value={value}
-                    onKeyUp={(ele) => TextFieldUtils.onKeyUpHandler(
-                        ele,
-                        onSubmitHandler,
-                    )}
-                    min={min}
-                    max={max}
-                    readOnly={readOnly}
-                    step={step}
+                    placeholder={placeholder}
                     onBlur={() => TextFieldUtils.onTextInputOnBlurHandler(
                         inputRef,
                         isRequired,
@@ -87,43 +63,11 @@ const CustomTextField = ({
                     onChange={(ele) => TextFieldUtils.onTextValueChangeHandler(
                         ele,
                         setValue,
-                        setHasValue,
                     )}
-                    className="flex-auto text-gray-500 font-semibold text-sm tracking-wide outline-none"
+                    className="flex-auto font-semibold text-sm tracking-wide outline-none"
                 />
-                {/* Clear Button */}
-                {
-                    (hasValue && showCloseButton) && (
-                        <section
-                            className="bg-red-100 p-0.5 cursor-pointer transition-colors duration-150 hover:bg-red-200"
-                            onClick={() => TextFieldUtils.clearTextValue(
-                                inputRef,
-                                setValue,
-                                setHasValue,
-                                setIsError,
-                            )}
-                        >
-                            <MdClose
-                                className="text-red-600"
-                                size={15}
-                            />
-                        </section>
-                    )
-                }
-            </div>
-            {/* Error or Help Texts */}
-            {
-                isError ? (
-                    <p className="text-xs text-red-500 pl-1">
-                        {errorText}
-                    </p>
-                ) : (
 
-                    <p className="text-xs text-gray-500 pl-1">
-                        {helpText}
-                    </p>
-                )
-            }
+            </div>
         </section>
     )
 }

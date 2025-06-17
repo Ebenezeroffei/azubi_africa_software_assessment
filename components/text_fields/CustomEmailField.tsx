@@ -1,4 +1,4 @@
-import Validators from "@constants/misc/validators"
+import Validators from "@/constants/misc/validators"
 import CustomTextField, { TextFieldProps } from "./CustomTextField"
 
 
@@ -6,7 +6,7 @@ const CustomEmailField = ({
     value,
     setValue,
     isRequired = true,
-    onSubmitHandler = () => { },
+    placeholder,
 }: TextFieldProps) => {
     return (
         <CustomTextField
@@ -15,9 +15,8 @@ const CustomEmailField = ({
             setValue={setValue}
             pattern={Validators.Email}
             isRequired={isRequired}
-            errorText="Invalid Email"
             textType="email"
-            onSubmitHandler={onSubmitHandler}
+            placeholder={placeholder}
         />
     )
 }

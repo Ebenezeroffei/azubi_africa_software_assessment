@@ -1,12 +1,14 @@
 
 export type ButtonProps = {
     text: string,
+    fill?: boolean,
     onPressed?: () => void,
 }
 
 
 const CustomButton = ({
     text,
+    fill = false,
     onPressed = () => { },
 }: ButtonProps) => {
 
@@ -15,7 +17,7 @@ const CustomButton = ({
             <button
                 onClick={onPressed}
                 type="button"
-                className="outline-none rounded-xs cursor-pointer bg-primary p-4  font-semibold uppercase text-xs tracking-wide text-white transition-all duration-300 ease-in-out hover:bg-secondary flex-none"
+                className={`outline-none rounded-xs cursor-pointer bg-primary p-4  font-semibold uppercase text-xs tracking-wide text-white transition-all duration-300 ease-in-out hover:bg-secondary ${fill ? 'max-w-[400px] flex-1' : 'flex-none'} `}
             >
                 {text}
             </button>
