@@ -106,7 +106,7 @@ const ThankYou = () => {
                                 {
                                     showMore
                                         ? "View less"
-                                        : `and two other items`
+                                        : `and ${cartItems.length - 1} other item(s)`
                                 }
 
                             </div>
